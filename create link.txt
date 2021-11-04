@@ -1,0 +1,6 @@
+CREATE DATABASE LINK link_name
+    CONNECT TO user_name IDENTIFIED BY password
+    USING '(DESCRIPTION=
+                (ADDRESS=(PROTOCOL=TCP)(HOST=255.255.255.255)(PORT=1521))
+                (CONNECT_DATA=(SERVICE_NAME=servis_name))
+            )';
