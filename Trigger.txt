@@ -1,0 +1,68 @@
+step 1 
+*************************************
+/*create table agrozamin(
+name varchar2(50),
+phone varchar2(50)
+)*/
+
+
+/*create table audits(
+name varchar2(128),
+username varchar2(128),
+action varchar2(50),
+UDI_old varchar2(50),
+UDI_new varchar2(50),
+date_t date
+);
+*/
+
+select * from audits;
+
+***********************************
+step 2   trigger (insert, update, delete)
+******************************************************
+create or replace TRIGGER agrozamin_audit_trg
+    AFTER 
+    UPDATE OR DELETE OR INSERT
+    on agrozamin
+    for each row
+DECLARE 
+    l_transaction varchar2(20);
+BEGIN
+    l_transaction := CASE
+        WHEN UPDATING THEN 'UPDATE'
+        WHEN DELETING THEN 'DELETE'
+        WHEN INSERTING THEN 'INSERT'
+    END;
+    IF l_transaction = 'INSERT' THEN 
+        INSERT INTO audits (name, username, action,UDI_old,UDI_new,date_t) VALUES(:old.name, USER,l_transaction, :old.phone ,:new.phone, SYSDATE);
+    elsif l_transaction = 'UPDATE' THEN 
+        INSERT INTO audits (name, username, action,UDI_old,UDI_new,date_t) VALUES(:old.name, USER,l_transaction, :old.phone,:new.phone, SYSDATE);
+    elsif l_transaction = 'DELETE' THEN 
+        INSERT INTO audits (name, username, action,UDI_old,UDI_new,date_t) VALUES(:old.name, USER,l_transaction, :old.phone,:new.phone, SYSDATE);
+    END IF;
+END;
+/
+*************************************************
+-- show triggers 
+select * from all_triggers where owner = 'RACL';
+select * from USER_TRIGGERS; 
+*************************************************
+-- drop triggers
+drop trigger agrozamin_audit_trg;
+*************************************************
+
+step 3 
+************************************************
+select * from agrozamin;
+select * from all_tables where owner ='RACL';
+
+insert into agrozamin values('Bunyod', '998904442204');
+commit;
+
+update agrozamin set phone = '998904442204' where name = 'Bunyod';
+commit;
+
+delete from agrozamin where name = 'Bunyod';
+commit;
+

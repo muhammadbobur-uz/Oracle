@@ -1,6 +1,6 @@
-CREATE DATABASE LINK link_name
-    CONNECT TO user_name IDENTIFIED BY password
-    USING '(DESCRIPTION=
-                (ADDRESS=(PROTOCOL=TCP)(HOST=255.255.255.255)(PORT=1521))
-                (CONNECT_DATA=(SERVICE_NAME=servis_name))
-            )';
+create database link acl
+ connect to work IDENTIFIED by Qaz123456
+ using '(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=172.16.20.74)(PORT=1521))(CONNECT_DATA=(sid=orcl)))';
+
+
+DROP database link acl;

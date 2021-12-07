@@ -1,0 +1,49 @@
+registrdan o'chirish
+***********************
+
+sc delete servise_name 
+
+ = >  servicews.msc
+
+***********************
+
+1.	username : sys as sysdba
+	password : sysdba
+
+2.  alter session set "_ORACLE_SCRIPT"=true;
+
+3.  create user racl identified by 159753;
+
+4.  grant all privileges to racl;
+
+
+
+
+
+
+**********************************************
+drop user 
+**********************************************
+SQL> drop user c##racl;
+
+User dropped.
+
+**********************************************
+SQL> alter session set "_ORACLE_SCRIPT"=true;
+
+Session altered.
+
+SQL> create user racl identified by 159753;
+
+User created.
+
+SQL> grant all privileges to racl;
+
+Grant succeeded.
+********************************************
+
+
+
+
+
+
