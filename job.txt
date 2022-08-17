@@ -1,0 +1,43 @@
+BEGIN
+dbms_scheduler.create_job (
+job_name            => 'secont_job',
+job_type            => 'PLSQL_BLOCK',
+job_action          => ' DECLARE 
+                         BEGIN 
+                         insert into t2 select id, name, birthday, age from t1;
+                         Delete from t2;
+                         commit;
+                         END;',
+start_date          => SYSTIMESTAMP,
+repeat_interval     => 'freq=SECONDLY; interval=20',
+end_date            => NULL,
+enabled             => TRUE,
+comments            => 't1 to t2 job' );
+END;
+          
+
+
+select * from all_scheduler_jobs;
+************************************************************
+* begin							   *
+*   SYS.dbms_scheduler.drop_job (job_name => 'first_job'); *
+* END;							   *
+* /           						   * 
+************************************************************
+
+***************************************************************
+procedure
+***************************************************************
+select distinct owner from all_source 
+
+select distinct(name) from all_source where owner = 'WORK'
+
+select line,text from all_source where name ='OMONAT_PACK' 
+--and text like '%LD_PORT%'
+order by line 
+
+
+
+select * from sd_clerk_all@ubo 
+select * from  port_sd@ubo
+****************************************************************
